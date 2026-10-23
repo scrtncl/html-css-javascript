@@ -8,6 +8,22 @@
 
   <!-- STEP 1: Add Bootstrap with one link tag -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- NEW: Small custom CSS for the hover effect.
+       Bootstrap has no hover-effect classes, so we add this ourselves.
+       transition = makes the change smooth instead of instant
+       :hover = applies when the mouse is over the box
+       transform: translateY(-6px) = lifts the box up
+       box-shadow = adds a soft shadow under the lifted box -->
+  <style>
+    .hover-box {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    }
+    .hover-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+      background-color: #f1f5ff;
+    }
+  </style>
 </head>
 <body>
 
@@ -47,19 +63,19 @@
   <div class="container mb-5">
     <div class="row g-3">
       <div class="col-12 col-md-4">
-        <div class="p-3 border rounded text-center">
+        <div class="p-3 border border-2 border-primary rounded text-center hover-box">
           <h3 class="h5">Easy</h3>
           <p class="mb-0">Just add classes to your HTML.</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
-        <div class="p-3 border rounded text-center">
+        <div class="p-3 border border-2 border-primary rounded text-center hover-box">
           <h3 class="h5">Responsive</h3>
           <p class="mb-0">Looks good on phone and laptop.</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
-        <div class="p-3 border rounded text-center">
+        <div class="p-3 border border-2 border-primary rounded text-center hover-box">
           <h3 class="h5">Fast</h3>
           <p class="mb-0">No need to write much CSS.</p>
         </div>
