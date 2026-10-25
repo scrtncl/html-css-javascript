@@ -1,144 +1,450 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <!-- Makes the page fit phone screens -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Simple Bootstrap Project</title>
+  <head>
+    <!-- meta charset = lets the page show all letters and symbols correctly -->
+    <meta charset="UTF-8" />
 
-  <!-- STEP 1: Add Bootstrap with one link tag -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- NEW: Small custom CSS for the hover effect.
-       Bootstrap has no hover-effect classes, so we add this ourselves.
-       transition = makes the change smooth instead of instant
-       :hover = applies when the mouse is over the box
-       transform: translateY(-6px) = lifts the box up
-       box-shadow = adds a soft shadow under the lifted box -->
-  <style>
-    .hover-box {
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
-    }
-    .hover-box:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
-      background-color: #f1f5ff;
-    }
-  </style>
-</head>
-<body>
+    <!-- meta viewport = makes the page fit phone screens. Without it, phones show a tiny zoomed-out page and Bootstrap's responsive classes will not work properly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- STEP 2: Header
-       bg-dark text-white = dark background, white text
-       py-3 = padding top and bottom
-       d-flex justify-content-between = flexbox, items pushed apart -->
-  <header class="bg-dark text-white py-3">
-    <div class="container d-flex justify-content-between align-items-center">
-      <h1 class="h4 mb-0">My Simple Page</h1>
-      <span>Built with Bootstrap</span>
-    </div>
-  </header>
+    <!-- title = the text shown on the browser tab -->
+    <title>Simple Bootstrap Project</title>
 
-  <!-- STEP 3: Intro
+    <!-- STEP 1: Add Bootstrap with one link tag
+       This loads Bootstrap's CSS file from the internet (a CDN).
+       Every class name in this page (btn, card, col-md-4...) is defined inside this file. -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Our own small CSS (Bootstrap has no hover classes, so we write this part ourselves)
+       .hover-box            = our own class name, used on the three feature cards
+       transition            = makes the change animate smoothly instead of jumping
+       0.25s ease            = the animation lasts a quarter of a second
+       .hover-box:hover      = the rules inside apply only while the mouse is over the card
+       transform: translateY(-6px) = moves the card 6px up
+       box-shadow            = adds a soft shadow under the lifted card
+       rgba(0, 0, 0, .15)    = black at 15% strength, so the shadow is light -->
+    <style>
+      .hover-box {
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+      .hover-box:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      }
+    </style>
+  </head>
+
+  <!-- body
+     bg-body-tertiary = light gray page background, so white boxes stand out -->
+  <body class="bg-body-tertiary">
+    <!-- ================= STEP 2: HEADER =================
+       header
+         bg-primary   = Bootstrap's blue background
+         text-white   = white text
+         py-3         = padding on top and bottom (p = padding, y = top and bottom, 3 = size)
+         shadow-sm    = small shadow under the header -->
+    <header class="bg-primary text-white py-3 shadow-sm">
+      <!-- container
+           container                = centers the content and gives it a maximum width
+           d-flex                   = display: flex (turns on flexbox)
+           flex-wrap                = lets items drop to the next line on small screens
+           justify-content-between  = pushes the title to the left and the menu to the right
+           align-items-center       = lines the items up in the vertical middle
+           gap-3                    = space between the items -->
+      <div
+        class="container d-flex flex-wrap justify-content-between align-items-center gap-3"
+      >
+        <!-- h4 = makes this h1 look like a smaller heading (the h1 tag is kept for meaning)
+           mb-0 = margin bottom 0, removes the default space under the heading
+           fw-bold = font weight bold -->
+        <h1 class="h4 mb-0 fw-bold">My Simple Page</h1>
+
+        <!-- nav links
+           d-flex = flexbox, so links sit in a row
+           gap-3  = space between the links
+           text-white = white link text (links are blue by default)
+           text-decoration-none = removes the underline
+           href="#features" = jumps to the element with id="features" -->
+        <nav class="d-flex gap-3">
+          <a href="#features" class="text-white text-decoration-none"
+            >Features</a
+          >
+          <a href="#steps" class="text-white text-decoration-none">Steps</a>
+          <a href="#faq" class="text-white text-decoration-none">FAQ</a>
+          <a href="#contact" class="text-white text-decoration-none">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ================= STEP 3: HERO (big intro box) =================
        container = centers the content
-       text-center = centers the text
-       my-5 = margin top and bottom -->
-  <div class="container text-center my-5">
-    <h2>Welcome!</h2>
-    <p class="lead">Bootstrap helps us build a nice layout using only class names.</p>
-    <a href="#contact" class="btn btn-primary">Contact us</a>
+       mt-4      = margin top (m = margin, t = top, 4 = size) -->
+    <div class="container mt-4">
+      <!-- bg-white     = white background
+         rounded-4    = very round corners
+         shadow-sm    = small shadow
+         p-5          = big padding on all sides inside the box
+         text-center  = centers all the text inside -->
+      <div class="bg-white rounded-4 shadow-sm p-5 text-center">
+        <!-- badge              = turns the span into a small label
+           rounded-pill       = fully round ends
+           text-bg-primary    = blue background with matching readable text color
+           mb-3               = margin bottom -->
+        <span class="badge rounded-pill text-bg-primary mb-3">Bootstrap 5</span>
 
-    <!-- NEW: Modal button (needs Bootstrap JavaScript)
-         data-bs-toggle="modal" = this button opens a modal
-         data-bs-target="#aboutModal" = which modal to open (matches the id below) -->
-    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#aboutModal">
-      Learn more
-    </button>
-  </div>
+        <!-- display-4 = a very large heading style
+           fw-bold   = bold text -->
+        <h2 class="display-4 fw-bold">Build pages faster</h2>
 
-  <!-- STEP 4: Grid
-       row = a row of columns
-       col-12 = full width on phones
-       col-md-4 = one third of the row on medium screens and up
-       g-3 = space between columns -->
-  <div class="container mb-5">
-    <div class="row g-3">
-      <div class="col-12 col-md-4">
-        <div class="p-3 border border-2 border-primary rounded text-center hover-box">
-          <h3 class="h5">Easy</h3>
-          <p class="mb-0">Just add classes to your HTML.</p>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="p-3 border border-2 border-primary rounded text-center hover-box">
-          <h3 class="h5">Responsive</h3>
-          <p class="mb-0">Looks good on phone and laptop.</p>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="p-3 border border-2 border-primary rounded text-center hover-box">
-          <h3 class="h5">Fast</h3>
-          <p class="mb-0">No need to write much CSS.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+        <!-- lead           = slightly bigger, lighter intro text
+           text-secondary = gray text
+           mx-auto        = margin left and right auto, which centers a box that has a max width
+           mb-4           = margin bottom
+           style max-width = our own inline CSS, stops the line from getting too wide -->
+        <p class="lead text-secondary mx-auto mb-4" style="max-width: 600px">
+          Bootstrap helps us build a nice layout using only class names.
+        </p>
 
-  <!-- STEP 5: Form
-       form-label = label style
-       form-control = input style
-       btn btn-success = green button -->
-  <div class="container mb-5" id="contact">
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-6">
-        <h2 class="text-center mb-3">Contact Form</h2>
-        <form>
-          <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name">
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email">
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" id="message" rows="3"></textarea>
-          </div>
-          <button type="submit" class="btn btn-success w-100">Send</button>
-        </form>
-      </div>
-    </div>
-  </div>
+        <!-- d-flex flex-wrap          = flexbox row that wraps on small screens
+           justify-content-center    = centers the buttons
+           gap-2                     = small space between the buttons -->
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+          <!-- btn          = turns the link into a button shape
+             btn-primary  = blue button
+             btn-lg       = large button
+             href="#contact" = jumps down to the contact form -->
+          <a href="#contact" class="btn btn-primary btn-lg">Contact us</a>
 
-  <!-- NEW: Modal (the popup box)
-       modal fade = the popup, hidden until the button is clicked
-       id="aboutModal" = matches data-bs-target on the button
-       data-bs-dismiss="modal" = clicking this closes the popup -->
-  <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="aboutModalLabel">What is Bootstrap?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Bootstrap is a free library of ready-made CSS and JavaScript. This popup is one of its pre-made components.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- MODAL BUTTON (this one needs Bootstrap JavaScript)
+             btn btn-outline-dark = button with a dark outline and no fill
+             btn-lg               = large button
+             data-bs-toggle="modal"     = tells Bootstrap: this button opens a modal
+             data-bs-target="#aboutModal" = which modal to open (matches the modal's id near the bottom) -->
+          <button
+            type="button"
+            class="btn btn-outline-dark btn-lg"
+            data-bs-toggle="modal"
+            data-bs-target="#aboutModal"
+          >
+            Learn more
+          </button>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3">
-    Thank you for listening!
-  </footer>
+    <!-- ================= STEP 4: FEATURE CARDS (the grid) =================
+       container = centers the content
+       my-5      = margin top and bottom
+       id="features" = the target for the "Features" link in the header -->
+    <div class="container my-5" id="features">
+      <!-- text-center = centers the text, fw-bold = bold, mb-4 = space below -->
+      <h2 class="text-center fw-bold mb-4">Why use Bootstrap?</h2>
 
-  <!-- NEW: Bootstrap JavaScript (put it at the bottom, just before </body>)
-       This one file makes the modal open and close. No JavaScript code to write. -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      <!-- row = starts a row of columns (a row has 12 parts)
+         g-4 = space (gutter) between the columns -->
+      <div class="row g-4">
+        <!-- col-12    = this column takes all 12 parts (full width) on phones
+           col-md-4  = from medium screens (768px) up, it takes 4 of 12 parts (one third)
+                       so three columns fit side by side -->
+        <div class="col-12 col-md-4">
+          <!-- card         = Bootstrap's box component
+             h-100        = height 100%, so all three cards are the same height
+             shadow-sm    = small shadow
+             border-0     = removes the normal card border
+             border-top   = turns on only the top border
+             border-4     = makes that border thick
+             border-primary = blue border color
+             hover-box    = OUR custom class from the style block (the lift effect) -->
+          <div
+            class="card h-100 shadow-sm border-0 border-top border-4 border-primary hover-box"
+          >
+            <!-- card-body    = padding and spacing inside the card
+               text-center  = centered text
+               p-4          = extra padding -->
+            <div class="card-body text-center p-4">
+              <!-- badge text-bg-primary = small blue label
+                 rounded-circle        = makes it round
+                 fs-5                  = font size 5 (a bit bigger)
+                 mb-3                  = margin bottom -->
+              <span class="badge text-bg-primary rounded-circle fs-5 mb-3"
+                >1</span
+              >
 
-</body>
+              <!-- h5 = looks like a heading level 5 -->
+              <h3 class="h5">Easy</h3>
+
+              <!-- text-secondary = gray text, mb-0 = no space under the paragraph -->
+              <p class="text-secondary mb-0">Just add classes to your HTML.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Same structure as the first card. Only the color class changes:
+           border-success / text-bg-success = green -->
+        <div class="col-12 col-md-4">
+          <div
+            class="card h-100 shadow-sm border-0 border-top border-4 border-success hover-box"
+          >
+            <div class="card-body text-center p-4">
+              <span class="badge text-bg-success rounded-circle fs-5 mb-3"
+                >2</span
+              >
+              <h3 class="h5">Responsive</h3>
+              <p class="text-secondary mb-0">Looks good on phone and laptop.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Same structure again. border-warning / text-bg-warning = yellow -->
+        <div class="col-12 col-md-4">
+          <div
+            class="card h-100 shadow-sm border-0 border-top border-4 border-warning hover-box"
+          >
+            <div class="card-body text-center p-4">
+              <span class="badge text-bg-warning rounded-circle fs-5 mb-3"
+                >3</span
+              >
+              <h3 class="h5">Fast</h3>
+              <p class="text-secondary mb-0">No need to write much CSS.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= STEP 5: STEPS (list group) =================
+       id="steps" = target for the "Steps" link -->
+    <div class="container my-5" id="steps">
+      <div class="row">
+        <!-- col-lg-8 = takes 8 of 12 parts on large screens (narrower than full width)
+           mx-auto = centers that column -->
+        <div class="col-lg-8 mx-auto">
+          <h2 class="text-center fw-bold mb-4">How to start</h2>
+
+          <!-- list-group            = styles a list as a neat box with lines between items
+             list-group-numbered   = adds numbers 1, 2, 3 automatically
+             shadow-sm             = small shadow -->
+          <ol class="list-group list-group-numbered shadow-sm">
+            <!-- list-group-item = one row inside the list group -->
+            <li class="list-group-item">
+              Add the Bootstrap link tag to your <code>&lt;head&gt;</code>.
+            </li>
+            <li class="list-group-item">
+              Build your layout with <code>row</code> and <code>col</code>.
+            </li>
+            <li class="list-group-item">
+              Style with classes like <code>btn</code> and
+              <code>text-center</code>.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= STEP 6: FAQ (accordion, needs Bootstrap JavaScript) =================
+       id="faq" = target for the "FAQ" link -->
+    <div class="container my-5" id="faq">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="text-center fw-bold mb-4">FAQ</h2>
+
+          <!-- accordion    = a group of sections that open and close
+             id="faqList" = a name so the sections inside can be linked to it -->
+          <div class="accordion shadow-sm" id="faqList">
+            <!-- accordion-item = one question and its answer -->
+            <div class="accordion-item">
+              <!-- accordion-header = holds the clickable question -->
+              <h3 class="accordion-header">
+                <!-- accordion-button = the clickable bar with the arrow
+                   data-bs-toggle="collapse" = tells Bootstrap: clicking opens or closes a section
+                   data-bs-target="#faq1"    = which section (matches the id below) -->
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq1"
+                >
+                  Is Bootstrap free?
+                </button>
+              </h3>
+
+              <!-- accordion-collapse collapse = the hidden answer area
+                 show                        = this one starts open
+                 id="faq1"                   = matches data-bs-target above
+                 data-bs-parent="#faqList"   = opening one closes the others in this accordion -->
+              <div
+                id="faq1"
+                class="accordion-collapse collapse show"
+                data-bs-parent="#faqList"
+              >
+                <!-- accordion-body = padding around the answer text -->
+                <div class="accordion-body">Yes, Bootstrap is free to use.</div>
+              </div>
+            </div>
+
+            <!-- Second question. The only differences:
+               "collapsed" on the button = shows the arrow as closed
+               no "show" on the answer   = starts closed -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq2"
+                >
+                  Do I still need to learn CSS?
+                </button>
+              </h3>
+              <div
+                id="faq2"
+                class="accordion-collapse collapse"
+                data-bs-parent="#faqList"
+              >
+                <div class="accordion-body">
+                  Yes. Knowing CSS helps you understand what the Bootstrap
+                  classes do.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= STEP 7: CONTACT FORM =================
+       id="contact" = target for the "Contact" link and the "Contact us" button -->
+    <div class="container my-5" id="contact">
+      <!-- justify-content-center = centers the column in the row (flexbox) -->
+      <div class="row justify-content-center">
+        <!-- col-12     = full width on phones
+           col-md-8   = 8 of 12 parts on medium screens
+           col-lg-6   = 6 of 12 parts (half) on large screens
+           So the form gets narrower as the screen gets wider -->
+        <div class="col-12 col-md-8 col-lg-6">
+          <!-- card shadow-sm border-0 = a box with a small shadow and no border -->
+          <div class="card shadow-sm border-0">
+            <!-- card-body = padding inside the card, p-4 = more padding -->
+            <div class="card-body p-4">
+              <h2 class="text-center fw-bold mb-4">Contact Form</h2>
+
+              <!-- row g-3 on the form = the form itself acts as a grid row
+                 g-3 = space between the fields -->
+              <form class="row g-3">
+                <!-- col-md-6 = half width on medium screens and up, so Name and Email sit side by side.
+                   On phones they stack (each full width). -->
+                <div class="col-md-6">
+                  <!-- form-label = label style
+                     for="name" = connects the label to the input with id="name" (clicking the label focuses the input) -->
+                  <label for="name" class="form-label">Name</label>
+
+                  <!-- form-control = input style (full width, rounded, focus glow) -->
+                  <input type="text" class="form-control" id="name" />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email</label>
+                  <!-- type="email" = the browser checks that it looks like an email -->
+                  <input type="email" class="form-control" id="email" />
+                </div>
+
+                <!-- col-12 = full width on every screen -->
+                <div class="col-12">
+                  <label for="message" class="form-label">Message</label>
+                  <!-- textarea = a bigger box for long text, rows="3" = starts 3 lines tall -->
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    rows="3"
+                  ></textarea>
+                </div>
+
+                <div class="col-12">
+                  <!-- btn btn-success = green button
+                     w-100 = width 100%, makes it stretch across the form -->
+                  <button type="submit" class="btn btn-success w-100">
+                    Send
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= MODAL (the popup box) =================
+       modal                  = the popup component
+       fade                   = makes it fade in and out
+       id="aboutModal"        = matches data-bs-target on the "Learn more" button
+       tabindex="-1"          = helps the keyboard (Esc key) close it
+       aria-labelledby, aria-hidden = help screen readers (accessibility) -->
+    <div
+      class="modal fade"
+      id="aboutModal"
+      tabindex="-1"
+      aria-labelledby="aboutModalLabel"
+      aria-hidden="true"
+    >
+      <!-- modal-dialog           = the popup's size and position
+         modal-dialog-centered  = centers it vertically on the screen -->
+      <div class="modal-dialog modal-dialog-centered">
+        <!-- modal-content = the white popup box itself -->
+        <div class="modal-content">
+          <!-- modal-header = top part with the title and the X -->
+          <div class="modal-header">
+            <!-- modal-title = styles the popup title -->
+            <h5 class="modal-title" id="aboutModalLabel">What is Bootstrap?</h5>
+
+            <!-- btn-close = the small X button
+               data-bs-dismiss="modal" = clicking it closes the popup -->
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <!-- modal-body = the main text area of the popup -->
+          <div class="modal-body">
+            Bootstrap is a free library of ready-made CSS and JavaScript. This
+            popup is one of its pre-made components.
+          </div>
+
+          <!-- modal-footer = bottom part for buttons
+             btn btn-secondary = gray button -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= FOOTER =================
+       bg-dark       = dark background
+       text-white    = white text
+       text-center   = centered text
+       py-4          = padding top and bottom -->
+    <footer class="bg-dark text-white text-center py-4">
+      Thank you for listening!
+    </footer>
+
+    <!-- BOOTSTRAP JAVASCRIPT
+       Placed at the bottom, just before the closing body tag.
+       This one file makes the modal and the accordion work.
+       We do not write any JavaScript ourselves. Bootstrap looks for the data-bs-... attributes and does the work. -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
